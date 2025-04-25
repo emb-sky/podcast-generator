@@ -1,6 +1,5 @@
 FROM ubuntu:latest
 
-# Install Python and required build dependencies in one layer
 RUN apt-get update && apt-get install -y \
     python3.10 \
     python3-pip \
@@ -10,8 +9,17 @@ RUN apt-get update && apt-get install -y \
     libc-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install PyYAML
-RUN pip3 install --no-cache-dir PyYAML
+# Option 1: Use --break-system-packages (not recommended but works)
+# RUN pip3 install --no-cache-dir --break-system-packages PyYAML
+
+# Option 2: Use a virtual environment (recommended)
+RUN python3 -m pip install --upgrade pip
+RUN pip3 install --no-cache-dir virtualenv
+RUN python3 -m virtualenv /opt/venv
+# Make sure we use the virtualenv
+ENV PATH="/opt/venv/bin:$PATH"
+# Now install PyYAML in the virtualenv
+RUN pip install --no-cache-dir PyYAML
 
 COPY feed.py /usr/bin/feed.py
 
