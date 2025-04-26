@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 # RUN pip3 install --no-cache-dir --break-system-packages PyYAML
 
 # Option 2: Use a virtual environment (recommended)
-RUN python3 -m pip install --upgrade pip3
+RUN python3 -m pip install --upgrade pip
 RUN pip3 install --no-cache-dir virtualenv
 RUN python3 -m virtualenv /opt/venv
 # Make sure we use the virtualenv
