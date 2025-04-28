@@ -1,4 +1,4 @@
-name: "podcast generator"
+name: "podcast generator for marketplace"
 author: "Sky Shetty"
 description: "Generate a podcast episode from a script"
 runs:
